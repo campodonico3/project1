@@ -1,5 +1,6 @@
 package dev.campodonico3.project1.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -10,15 +11,17 @@ import dev.campodonico3.project1.R
 import dev.campodonico3.project1.databinding.ViewholderCategoryBinding
 import dev.campodonico3.project1.domain.CategoryDomain
 
+// Clase que adapta los datos para mostrarlos en un RecyclerView
 class CategoryAdapter(val items: MutableList<CategoryDomain>) :
     RecyclerView.Adapter<CategoryAdapter.Viewholder>() {
 
-    private lateinit var context: Context
-    private var selectedPosition = -1
-    private var lastSelectedPosition = -1
+    private lateinit var context: Context // Contexto de la aplicación
+    private var selectedPosition = -1 // Posición del elemento actualmente seleccionado (-1 = ninguno)
+    private var lastSelectedPosition = -1 // Posición del elemento previamente seleccionado (para deseleccionarlo)
 
     class Viewholder(val binding: ViewholderCategoryBinding) : RecyclerView.ViewHolder(binding.root)
 
+    // Crear vistas
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,29 +30,34 @@ class CategoryAdapter(val items: MutableList<CategoryDomain>) :
         val binding = ViewholderCategoryBinding.inflate(
             LayoutInflater.from(context), parent, false
         )
-
         return Viewholder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategoryAdapter.Viewholder, position: Int) {
-        val item = items[position]
-        holder.binding.titleCat.text = item.title
+    // Se ejecuta cada vez que una vista necesita motrar datos
+    override fun onBindViewHolder(holder: CategoryAdapter.Viewholder, @SuppressLint("RecyclerView") position: Int) {
+        val item = items[position] // Obtiene la categoría en la posición actual
+        holder.binding.titleCat.text = item.title // Muestra el nombre de la categoría en el TextView
+
+        // Menejo del clic del elemento
         holder.binding.root.setOnClickListener {
-            lastSelectedPosition = selectedPosition
-            selectedPosition = position
-            notifyItemChanged(lastSelectedPosition)
-            notifyItemChanged(selectedPosition)
+            lastSelectedPosition = selectedPosition // Guarda la posición anterior
+            selectedPosition = position             // Actualizar a la nueva posición
+            notifyItemChanged(lastSelectedPosition) // Redibujar el elemento anterior
+            notifyItemChanged(selectedPosition)     // Redibujar el elemento actual
 
             Handler(Looper.getMainLooper()).postDelayed({
 
             }, 500)
         }
 
+        // Cambiar apariencia según la selección
         if (selectedPosition == position) {
-            holder.binding.titleCat.setBackgroundColor(R.drawable.brown_full_corner)
+            // Elemento SELECCIONADO
+            holder.binding.titleCat.setBackgroundResource(R.drawable.brown_full_corner)
             holder.binding.titleCat.setTextColor(context.resources.getColor(R.color.white))
         } else {
-            holder.binding.titleCat.setBackgroundColor(R.drawable.cream_full_corner)
+            // Elemento NO SELECCIONADO
+            holder.binding.titleCat.setBackgroundResource(R.drawable.cream_full_corner)
             holder.binding.titleCat.setTextColor(context.resources.getColor(R.color.darkBrown))
         }
     }

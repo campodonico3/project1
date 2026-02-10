@@ -49,11 +49,16 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
-    implementation(libs.firebase.database.ktx)
-    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("com.google.code.gson:gson:2.13.2")
+
+    // ✅ FIREBASE - Agregar BOM primero
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+
+    // ✅ Luego las dependencias SIN versión (el BOM las gestiona)
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
