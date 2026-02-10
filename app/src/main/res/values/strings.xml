@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">project1</string>
+    <string name="coffee_shop">Coffee Shop</string>
+    <string name="search_coffies">Search coffies...</string>
+    <string name="catrgory">Catrgory</string>
+    <string name="category">Category</string>
+</resources>
