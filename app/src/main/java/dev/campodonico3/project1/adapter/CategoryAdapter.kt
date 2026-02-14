@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.campodonico3.project1.R
 import dev.campodonico3.project1.databinding.ViewholderCategoryBinding
-import dev.campodonico3.project1.domain.CategoryDomain
+import dev.campodonico3.project1.domain.CategoryModal
 
 // Clase que adapta los datos para mostrarlos en un RecyclerView
-class CategoryAdapter(val items: MutableList<CategoryDomain>) :
+class CategoryAdapter(val items: MutableList<CategoryModal>) :
     RecyclerView.Adapter<CategoryAdapter.Viewholder>() {
 
     private lateinit var context: Context // Contexto de la aplicación

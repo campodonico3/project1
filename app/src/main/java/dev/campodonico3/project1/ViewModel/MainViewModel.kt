@@ -2,7 +2,9 @@ package dev.campodonico3.project1.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import dev.campodonico3.project1.domain.CategoryDomain
+import dev.campodonico3.project1.domain.BannerModel
+import dev.campodonico3.project1.domain.CategoryModal
+import dev.campodonico3.project1.domain.ItemsModel
 import dev.campodonico3.project1.repository.MainRepository
 
 class MainViewModel : ViewModel() {
@@ -15,8 +17,16 @@ class MainViewModel : ViewModel() {
     private val repository = MainRepository()
 
     // Actúa como intermediario entre la UI y el Repository
-    fun loadCategory(): LiveData<MutableList<CategoryDomain>> {
+    fun loadCategory(): LiveData<MutableList<CategoryModal>> {
         return repository.loadCategory()
+    }
+
+    fun loadBanner(): LiveData<MutableList<BannerModel>>{
+        return repository.loadBanner()
+    }
+
+    fun loadPopular(): LiveData<MutableList<ItemsModel>> {
+        return repository.loadPopular()
     }
 }
 
