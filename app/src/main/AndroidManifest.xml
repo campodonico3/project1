@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1">
         <activity
+            android:name=".activities.ItemListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
