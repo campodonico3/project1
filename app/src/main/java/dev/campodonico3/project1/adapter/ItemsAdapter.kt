@@ -1,10 +1,12 @@
 package dev.campodonico3.project1.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.campodonico3.project1.activities.DetailActivity
 import dev.campodonico3.project1.databinding.ViewholderItemBinding
 import dev.campodonico3.project1.domain.ItemsModel
 
@@ -36,6 +38,12 @@ class ItemsAdapter(val items: MutableList<ItemsModel>) :
         holder.binding.subtitleTxt.text = items[position].extra
 
         Glide.with(context).load(items[position].picUrl[0]).into(holder.binding.pic)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("object", items[position])
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = items.size
