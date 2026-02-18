@@ -1,5 +1,6 @@
 package dev.campodonico3.project1.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import dev.campodonico3.project1.ViewModel.MainViewModel
 import dev.campodonico3.project1.adapter.CategoryAdapter
 import dev.campodonico3.project1.adapter.ItemsAdapter
 import dev.campodonico3.project1.databinding.ActivityMainBinding
+import kotlin.jvm.java
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         initCategory()
         initBanner()
         initPopular()
+        initBottomMenu()
+    }
+
+    private fun initBottomMenu() {
+        binding.cartBtn.setOnClickListener {
+            startActivity(Intent(this, CardActivity::class.java))
+        }
     }
 
     private fun initPopular() {
